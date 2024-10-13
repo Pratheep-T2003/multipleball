@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Ball Creator</title>
+    <style>
+        .box {
+            position: relative; /* Change to relative for positioning of balls */
+            width: 100%; /* Use 100% width */
+            height: 600px; /* Set a specific height for the box */
+            border: 2px solid black; /* Make the border visible */
+            overflow: hidden; /* Hide overflow */
+        }
+
+        .ball {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <button id="startButton">Start</button>
+    <script>
+        function create() {
+            // Create a new div element for the ball
+            var part = document.createElement('div');
+            let color = randomColor();
+
+            // Generate random position for the ball while keeping it within the bounds of the box dimensions
+            var left = Math.floor(Math.random() * (window.innerWidth - 50)); // Adjust for the width of the ball
+            var top = Math.floor(Math.random() * (window.innerHeight - 60)); // Adjust for the height of the ball and the button
+
+            // Set styles for the ball
+            part.style.top = top + 'px';
+            part.style.left = left + 'px';
+            part.style.backgroundColor = color; // Change to backgroundColor for clarity
+            part.className = 'ball'; // Add class name for styling
+
+            // Append the ball to the box for better visibility
+            document.querySelector('.box').appendChild(part);
+        }
+
+        function randomColor() {
+            // Return a random color from the predefined palette
+            let palette = ["red", "orange", "green"];
+            return palette[Math.floor(Math.random() * palette.length)];
+        }
+
+        // Event listener for the start button
+        document.getElementById('startButton').addEventListener('click', function () {
+            create(); // Create a single ball when the button is clicked
+        });
+    </script>
+</body>
+
+</html>
